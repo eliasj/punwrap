@@ -1,4 +1,8 @@
-"""Python-side project management tasks."""
+"""Python-side project management tasks.
+
+Call using “inv”, the PyInvoke CLI.
+
+"""
 
 from invoke import task
 
@@ -12,25 +16,30 @@ def importcheck(c):
     c.run(f'python3 -c "{script}"')  # Should print “long\nline”.
     c.run('rm punwrap.so')
 
+
 @task()
 def build_dev(c):
     """Build a Python package for the system Python version only."""
     c.run('maturin build')
 
+
 @task()
 def build_release(c):
     """Build for many Python versions, in Docker."""
+    # The output directory is not customized here, expecting target/wheels.
     c.run('docker run --rm -v $(pwd):/io konstin2/maturin build --release')
 
+
 @task()
+def clean(c):
+    """Remove artifacts."""
+    c.run('rm -rf dist')
+
+
+@task(pre=[clean, build_release])
 def deploy(c):
     """Upload to PyPI."""
     c.run('inv clean build-release')
     c.run('sudo chown -R $USER:$GROUP target/wheels')
     c.run('mv target/wheels dist')
     c.run('twine check dist/*')
-
-@task()
-def clean(c):
-    """Remove artifacts."""
-    c.run('rm -rf dist')
