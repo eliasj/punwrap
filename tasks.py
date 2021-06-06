@@ -21,3 +21,16 @@ def build_dev(c):
 def build_release(c):
     """Build for many Python versions, in Docker."""
     c.run('docker run --rm -v $(pwd):/io konstin2/maturin build --release')
+
+@task()
+def deploy(c):
+    """Upload to PyPI."""
+    c.run('inv clean build-release')
+    c.run('sudo chown -R $USER:$GROUP target/wheels')
+    c.run('mv target/wheels dist')
+    c.run('twine check dist/*')
+
+@task()
+def clean(c):
+    """Remove artifacts."""
+    c.run('rm -rf dist')
