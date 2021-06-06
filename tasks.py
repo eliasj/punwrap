@@ -2,6 +2,7 @@
 
 from invoke import task
 
+
 @task()
 def importcheck(c):
     c.run('cargo build')
@@ -9,3 +10,7 @@ def importcheck(c):
     script = "import punwrap ; print(punwrap.wrap('long line', 6))"
     c.run(f'python3 -c "{script}"')  # Should print “long\nline”.
     c.run('rm punwrap.so')
+
+@task()
+def build(c):
+    c.run('maturin build')
