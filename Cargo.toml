@@ -15,7 +15,7 @@ name = "punwrap"
 crate-type = ["cdylib"]
 
 [dependencies]
-runwrap = "0.1"
+runwrap = "0.2"
 
 [dependencies.pyo3]
 version = "0.13"
