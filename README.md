@@ -1,5 +1,5 @@
 `punwrap` provides only Python bindings for
-`[runwrap](https://github.com/veikman/runwrap)`, a Rust library for wrapping
+[`runwrap`](https://github.com/veikman/runwrap), a Rust library for wrapping
 and unwrapping paragraphs of Markdown.
 
 ## License
