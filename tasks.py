@@ -38,8 +38,13 @@ def clean(c):
 
 @task(pre=[clean, build_release])
 def deploy(c):
-    """Upload to PyPI."""
-    c.run('inv clean build-release')
+    """Upload to PyPI.
+
+    This could be done in one step with “maturin publish”, but a flat, more
+    transparent process is currently preferred.
+
+    """
     c.run('sudo chown -R $USER:$GROUP target/wheels')
     c.run('mv target/wheels dist')
     c.run('twine check dist/*')
+    c.run('twine upload dist/*')
