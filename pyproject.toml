@@ -1,3 +1,5 @@
+# Python-side project configuration.
+# See Cargo.toml for project metadata exported in the build process.
 # See tasks.py for project tasks.
 
 [build-system]
