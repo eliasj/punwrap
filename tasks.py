@@ -13,8 +13,9 @@ from invoke import Collection, task
 @task()
 def importcheck(c):
     """Check that a straight Cargo build leaves an importable module."""
+    c.run('rm target/debug/libpunwrap.so', warn=True, hide=True)
     c.run('cargo build')
-    c.run('mv target/debug/libpunwrap.so punwrap.so', warn=True)
+    c.run('mv target/debug/libpunwrap.so punwrap.so')
     script = "import punwrap ; print(punwrap.wrap('long line', 6))"
     c.run(f'python3 -c "{script}"')  # Should print “long\nline”.
     c.run('rm punwrap.so')
