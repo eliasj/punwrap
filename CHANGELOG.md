@@ -9,7 +9,8 @@ Nothing yet.
 ## [0.2.0] – 2021-07-12
 ### Added
 - Support for `musl`-based Linux platforms under PEP 656.
-  (At the time of this release, `pip` cannot yet install `musl` artifacts.)
+  (At the time of this release, `pip` cannot yet install `musl` artifacts,
+  nor does `pypi` accept them for upload.)
 
 [Unreleased]: https://github.com/veikman/punwrap/compare/punwrap-v0.2.0...HEAD
 [0.2.0]: https://github.com/veikman/punwrap/compare/punwrap-v0.1.0...v0.2.0
