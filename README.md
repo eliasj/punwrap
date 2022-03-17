@@ -7,6 +7,6 @@ For an example of higher-level utilities built on `punwrap`, see
 
 ## License
 
-Copyright 2021 Viktor Eikman
+Copyright 2021–2022 Viktor Eikman
 
 `punwrap` is licensed as detailed in the accompanying file LICENSE.
