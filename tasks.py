@@ -64,8 +64,12 @@ def build_musllinux(c):
 
 
 @task()
-def clean(c):
+def clean(c, deep=False):
     """Remove artifacts."""
+    if deep:
+        c.sudo('rm -rf target')
+    else:
+        c.sudo('rm -rf target/wheels')
     c.run('rm -rf dist')
 
 
