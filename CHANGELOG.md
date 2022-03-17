@@ -4,7 +4,9 @@ This log follows the conventions of
 version 0.1.0.
 
 ## [Unreleased]
-Nothing yet.
+### Changed
+- Updated Python interpreters in the `musl` build environment to the latest
+  point releases of Python 3.6–3.10.
 
 ## [0.2.0] – 2021-07-12
 ### Added

@@ -7,7 +7,6 @@ target/wheels even for sdist.
 
 """
 
-
 from invoke import Collection, task
 
 
@@ -53,7 +52,7 @@ def build_musllinux(c):
 
     """
     target_platform = "musllinux_1_2"  # musl version 1.2.x.
-    versions = [[3, 6, 14], [3, 7, 11], [3, 8, 11], [3, 9, 6], [3, 10, "0b3"]]
+    versions = [[3, 6, 15], [3, 7, 13], [3, 8, 13], [3, 9, 11], [3, 10, 3]]
     base = f'maturin build --release --compatibility {target_platform}'
     for major, minor, fix in versions:
         short = f'{major}.{minor}'
@@ -63,20 +62,20 @@ def build_musllinux(c):
     c.run('sudo chown -R $USER:$GROUP target')
 
 
-@ task()
+@task()
 def clean(c):
     """Remove artifacts."""
     c.run('rm -rf dist')
 
 
-@ task(pre=[clean, build_manylinux, build_musllinux], default=True)
+@task(pre=[clean, build_manylinux, build_musllinux], default=True)
 def build_all(c):
     """Build to dist/ for distribution. Check results."""
     c.run('mv target/wheels dist')
     c.run('twine check dist/*')
 
 
-@ task(pre=[clean, build_all])
+@task(pre=[clean, build_all])
 def deploy(c):
     """Build and upload to PyPI.
 
