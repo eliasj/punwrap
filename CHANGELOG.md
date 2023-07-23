@@ -3,17 +3,18 @@ This log follows the conventions of
 [keepachangelog.com](http://keepachangelog.com/). It picks up from `punwrap`
 version 0.1.0.
 
-## Unreleased
+## [0.2.3] – 2023-07-23
+No efficacious changes to source code were made for this release.
 
 ### Changed
 - Updated build system to `maturin` v1.
 - Started using Docker for `musllinux` builds, not just `manylinux`.
 
 ### Added
-- Python v3.11.
+- Build for Python v3.11.
 
 ### Removed
-- Dropped Python v3.6, v3.7.
+- Builds for Python v3.6, v3.7.
 
 ## [0.2.2] – 2023-07-23
 No efficacious changes to source code were made for this release.
