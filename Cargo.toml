@@ -26,5 +26,5 @@ crate-type = ["cdylib"]
 runwrap = "0.2"
 
 [dependencies.pyo3]
-version = "0.13"
+version = "0.19"
 features = ["extension-module"]
