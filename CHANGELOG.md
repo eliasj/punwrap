@@ -3,6 +3,13 @@ This log follows the conventions of
 [keepachangelog.com](http://keepachangelog.com/). It picks up from `punwrap`
 version 0.1.0.
 
+## Unreleased
+
+### Changed
+- Updated build system to `maturin` v1.
+- Updated Python interpreters in the `musl` build environment to the latest
+  point releases of Python 3.8–3.11, dropping 3.6–3.7.
+
 ## [0.2.2] – 2023-07-23
 No efficacious changes to source code were made for this release.
 It is only a rebuild made to fix a `manylinux_2_17` `libc` compliance problem
