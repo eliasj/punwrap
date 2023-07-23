@@ -9,6 +9,10 @@ target/wheels even for sdist.
 
 from invoke import Collection, task
 
+PYTHON_INTERPRETER_VERSIONS = [[3, 8], [3, 9], [3, 10], [3, 11]]
+INTERPRETER_STRING = ' '.join(f'--interpreter python{major}.{minor}'
+                              for major, minor in PYTHON_INTERPRETER_VERSIONS)
+
 
 @task()
 def importcheck(c):
@@ -23,12 +27,11 @@ def importcheck(c):
 
 @task()
 def build_dev(c):
-    """Build a Python package for the system Python version only."""
+    """Build a Python package without Docker, for the system Python only."""
     c.run('maturin build')
 
 
-@task()
-def build_manylinux(c):
+def _build_in_docker(c, tail: str = ''):
     """Build manylinux-compatible Python wheels.
 
     As per the manylinux PEPs, building is done on CentOS. Docker is required.
@@ -37,37 +40,35 @@ def build_manylinux(c):
     Artifacts should be compatible with glibc-based Linux distros like Debian.
 
     """
-    c.run('docker run --rm -v $(pwd):/io ghcr.io/pyo3/maturin build --release')
-    c.run('sudo chown -R $USER:$GROUP target')
+    c.run('docker run --rm -v $(pwd):/io ghcr.io/pyo3/maturin build '
+          f'--release {INTERPRETER_STRING} {tail}')
+
+
+@task()
+def build_manylinux(c):
+    """Build manylinux-compatible Python wheels.
+
+    This is the default compatibility mode of maturin.
+
+    """
+    _build_in_docker(c)
 
 
 @task()
 def build_musllinux(c):
     """Build musllinux-compatible Python wheels.
 
-    Building happens on the local machine, but with pyenv shims. This task
-    thus requires a pyenv installation with each of the listed CPython
-    interpreter versions. They are selected to match those of the manylinux
-    Docker job (see above) (by major-minor tuple) as of 2022-07.
-
     Artifacts should be compatible with Linux distros like Alpine that use musl
     instead of glibc.
 
     """
-    target_platform = "musllinux_1_2"  # musl version 1.2.x.
-    versions = [[3, 8, 17], [3, 9, 17], [3, 10, 12], [3, 11, 4]]
-    base = f'maturin build --release --compatibility {target_platform}'
-    for major, minor, fix in versions:
-        short = f'{major}.{minor}'
-        long = f'{short}.{fix}'
-        c.run(f'pyenv install --skip-existing {long}')
-        c.run(f'PYENV_VERSION={long} {base} --interpreter python{short}')
-    c.run('sudo chown -R $USER:$GROUP target')
+    _build_in_docker(c, tail='--compatibility musllinux_1_2')  # musl v1.2.x.
 
 
 @task()
 def clean(c, deep=False):
     """Remove artifacts."""
+    c.run('sudo chown -R $USER:$GROUP target', warn=True)
     if deep:
         c.sudo('rm -rf target')
     else:
@@ -78,6 +79,7 @@ def clean(c, deep=False):
 @task(pre=[clean, build_manylinux, build_musllinux], default=True)
 def build_all(c):
     """Build to dist/ for distribution. Check results."""
+    c.run('sudo chown -R $USER:$GROUP target')
     c.run('mv target/wheels dist')
     c.run('twine check dist/*')
 

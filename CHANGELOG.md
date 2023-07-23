@@ -7,8 +7,13 @@ version 0.1.0.
 
 ### Changed
 - Updated build system to `maturin` v1.
-- Updated Python interpreters in the `musl` build environment to the latest
-  point releases of Python 3.8–3.11, dropping 3.6–3.7.
+- Started using Docker for `musllinux` builds, not just `manylinux`.
+
+### Added
+- Python v3.11.
+
+### Removed
+- Dropped Python v3.6, v3.7.
 
 ## [0.2.2] – 2023-07-23
 No efficacious changes to source code were made for this release.
@@ -29,6 +34,7 @@ changes in the wider ecosystem.
   (At the time of this release, `pip` cannot yet install `musl` artifacts,
   nor does `pypi` accept them for upload.)
 
-[Unreleased]: https://github.com/veikman/punwrap/compare/punwrap-v0.2.1...HEAD
+[Unreleased]: https://github.com/veikman/punwrap/compare/punwrap-v0.2.2...HEAD
+[0.2.1]: https://github.com/veikman/punwrap/compare/punwrap-v0.2.1...v0.2.2
 [0.2.1]: https://github.com/veikman/punwrap/compare/punwrap-v0.2.0...v0.2.1
 [0.2.0]: https://github.com/veikman/punwrap/compare/punwrap-v0.1.0...v0.2.0
