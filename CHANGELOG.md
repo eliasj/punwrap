@@ -3,6 +3,11 @@ This log follows the conventions of
 [keepachangelog.com](http://keepachangelog.com/). It picks up from `punwrap`
 version 0.1.0.
 
+## [0.2.2] – 2023-07-23
+No efficacious changes to source code were made for this release.
+It is only a rebuild made to fix a `manylinux_2_17` `libc` compliance problem
+when downloading v0.2.1 to newer systems.
+
 ## [0.2.1] – 2022-03-17
 This release does not fix bugs. It was made for wider portability, following
 changes in the wider ecosystem.
