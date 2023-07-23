@@ -53,7 +53,7 @@ def build_musllinux(c):
 
     """
     target_platform = "musllinux_1_2"  # musl version 1.2.x.
-    versions = [[3, 6, 15], [3, 7, 13], [3, 8, 13], [3, 9, 11], [3, 10, 3]]
+    versions = [[3, 8, 13], [3, 9, 11], [3, 10, 3]]
     base = f'maturin build --release --compatibility {target_platform}'
     for major, minor, fix in versions:
         short = f'{major}.{minor}'
