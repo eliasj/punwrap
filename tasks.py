@@ -32,10 +32,12 @@ def build_manylinux(c):
     """Build manylinux-compatible Python wheels.
 
     As per the manylinux PEPs, building is done on CentOS. Docker is required.
+    As of 2023-07, the Docker image used here is recommended in
+    https://github.com/PyO3/maturin/tree/main#manylinux-and-auditwheel.
     Artifacts should be compatible with glibc-based Linux distros like Debian.
 
     """
-    c.run('docker run --rm -v $(pwd):/io konstin2/maturin build --release')
+    c.run('docker run --rm -v $(pwd):/io ghcr.io/pyo3/maturin build --release')
     c.run('sudo chown -R $USER:$GROUP target')
 
 
