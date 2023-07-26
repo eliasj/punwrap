@@ -1,0 +1,40 @@
+# A lot of this was copied from
+# https://github.com/messense/py-dissimilar/blob/main/.github/workflows/CI.yml
+
+name: build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target: [x86_64, i686]
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        architecture: x64
+    - name: Build wheels
+      uses: PyO3/maturin-action@v1
+      with:
+        rust-toolchain: stable
+        target: ${{ matrix.target }}
+        manylinux: auto
+        args: --release --out dist -i 3.8 3.9 3.10 3.11
+    - name: Check wheel
+      if: matrix.target == 'x86_64'
+      run: |
+        pip install punwrap --no-index --find-links dist --force-reinstall
+        python -c 'import punwrap'
+    - name: Upload wheels
+      uses: actions/upload-artifact@v3
+      with:
+        name: wheels
+        path: dist
