@@ -56,10 +56,17 @@ def build_manylinux(c):
 
 @task()
 def build_musllinux(c):
-    """Build musllinux-compatible Python wheels.
+    """Build musllinux-compatible Python wheels. Ineffective.
 
     Artifacts should be compatible with Linux distros like Alpine that use musl
-    instead of glibc.
+    instead of glibc. However, they are not. As of maturin v1.1.0, the program
+    accepts the option given here without actually compiling for musl,
+    and even if the right --target option is given, the ghcr.io/pyo3/maturin
+    image does not have the necessary software to do the work.
+
+    This task is a placeholder for the future addition of local control over a
+    more suitable Docker container. In the meantime, see the GitHub workflows
+    of this repository.
 
     """
     _build_in_docker(c, tail='--compatibility musllinux_1_2')  # musl v1.2.x.
@@ -86,9 +93,10 @@ def build_all(c):
 
 @task(pre=[clean, build_all])
 def deploy(c):
-    """Build and upload to PyPI.
+    """Build and upload to PyPI. Deprecated.
 
-    This could also be done with “maturin publish”.
+    This is not the official deployment process any more. Publication happens
+    from GitHub Actions.
 
     """
     c.run('twine upload dist/*')
