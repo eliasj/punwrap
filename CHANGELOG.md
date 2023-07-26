@@ -3,6 +3,15 @@ This log follows the conventions of
 [keepachangelog.com](http://keepachangelog.com/). It picks up from `punwrap`
 version 0.1.0.
 
+## [Unreleased]
+Nothing yet.
+
+## [0.2.4] – 2023-07-25
+No efficacious changes to source code were made for this release.
+
+### Changed
+- Centralized compilation.
+
 ## [0.2.3] – 2023-07-23
 No efficacious changes to source code were made for this release.
 
@@ -35,7 +44,8 @@ changes in the wider ecosystem.
   (At the time of this release, `pip` cannot yet install `musl` artifacts,
   nor does `pypi` accept them for upload.)
 
-[Unreleased]: https://github.com/veikman/punwrap/compare/punwrap-v0.2.3...HEAD
+[Unreleased]: https://github.com/veikman/punwrap/compare/punwrap-v0.2.4...HEAD
+[0.2.4]: https://github.com/veikman/punwrap/compare/punwrap-v0.2.3...v0.2.4
 [0.2.3]: https://github.com/veikman/punwrap/compare/punwrap-v0.2.2...v0.2.3
 [0.2.2]: https://github.com/veikman/punwrap/compare/punwrap-v0.2.1...v0.2.2
 [0.2.1]: https://github.com/veikman/punwrap/compare/punwrap-v0.2.0...v0.2.1
