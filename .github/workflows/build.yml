@@ -66,7 +66,7 @@ jobs:
       if: matrix.target == 'x86_64-unknown-linux-musl'
       uses: addnab/docker-run-action@v3
       with:
-        image: alpine:latest
+        image: python:3.11-alpine
         options: -v ${{ github.workspace }}:/io -w /io
         run: |
           pip install punwrap --no-index --find-links /io/dist/ --force-reinstall
