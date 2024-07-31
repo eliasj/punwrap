@@ -4,7 +4,9 @@ This log follows the conventions of
 version 0.1.0.
 
 ## [Unreleased]
-Nothing yet.
+
+### Added
+- Build for Python v3.12.
 
 ## [0.2.4] – 2023-07-25
 No efficacious changes to source code were made for this release.
