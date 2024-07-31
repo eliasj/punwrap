@@ -9,7 +9,7 @@ target/wheels even for sdist.
 
 from invoke import Collection, task
 
-PYTHON_INTERPRETER_VERSIONS = [[3, 8], [3, 9], [3, 10], [3, 11]]
+PYTHON_INTERPRETER_VERSIONS = [[3, 8], [3, 9], [3, 10], [3, 11], [3, 12]]
 INTERPRETER_STRING = ' '.join(f'--interpreter python{major}.{minor}'
                               for major, minor in PYTHON_INTERPRETER_VERSIONS)
 
