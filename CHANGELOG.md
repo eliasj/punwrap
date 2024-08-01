@@ -6,11 +6,17 @@ version 0.1.0.
 ## [Unreleased]
 Nothing yet.
 
+## [0.2.6] – 2024-08-01
+No efficacious changes to source code were made for this release.
+
+### Added
+- Server-side build for Python v3.12.
+
 ## [0.2.5] – 2024-08-01
 No efficacious changes to source code were made for this release.
 
 ### Added
-- Build for Python v3.12.
+- Local build for Python v3.12.
 
 ## [0.2.4] – 2023-07-25
 No efficacious changes to source code were made for this release.
@@ -50,7 +56,8 @@ changes in the wider ecosystem.
   (At the time of this release, `pip` cannot yet install `musl` artifacts,
   nor does `pypi` accept them for upload.)
 
-[Unreleased]: https://github.com/veikman/punwrap/compare/punwrap-v0.2.5...HEAD
+[Unreleased]: https://github.com/veikman/punwrap/compare/punwrap-v0.2.6...HEAD
+[0.2.6]: https://github.com/veikman/punwrap/compare/punwrap-v0.2.5...v0.2.6
 [0.2.5]: https://github.com/veikman/punwrap/compare/punwrap-v0.2.4...v0.2.5
 [0.2.4]: https://github.com/veikman/punwrap/compare/punwrap-v0.2.3...v0.2.4
 [0.2.3]: https://github.com/veikman/punwrap/compare/punwrap-v0.2.2...v0.2.3
