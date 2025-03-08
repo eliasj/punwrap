@@ -7,4 +7,4 @@ requires = ["maturin>=1.1,<2"]
 build-backend = "maturin"
 
 [tool.maturin]
-manylinux = "2014"
+compatibility = ["manylinux2014", "musllinux_1_2"]
