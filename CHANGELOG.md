@@ -4,6 +4,12 @@ This log follows the conventions of
 version 0.1.0.
 
 ## [Unreleased]
+Nothing yet.
+
+## [0.3.0] – 2025-03-08
+
+### Changed
+- `pyo3` upgraded to 0.23, and Rust edition to 2021.
 
 ### Added
 - Local and server-side builds for Python v3.13.
@@ -62,7 +68,8 @@ changes in the wider ecosystem.
   (At the time of this release, `pip` cannot yet install `musl` artifacts,
   nor does `pypi` accept them for upload.)
 
-[Unreleased]: https://github.com/veikman/punwrap/compare/punwrap-v0.2.6...HEAD
+[Unreleased]: https://github.com/veikman/punwrap/compare/punwrap-v0.3.0...HEAD
+[0.3.0]: https://github.com/veikman/punwrap/compare/punwrap-v0.2.6...v0.3.0
 [0.2.6]: https://github.com/veikman/punwrap/compare/punwrap-v0.2.5...v0.2.6
 [0.2.5]: https://github.com/veikman/punwrap/compare/punwrap-v0.2.4...v0.2.5
 [0.2.4]: https://github.com/veikman/punwrap/compare/punwrap-v0.2.3...v0.2.4
