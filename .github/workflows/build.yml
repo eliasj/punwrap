@@ -19,8 +19,8 @@ jobs:
       matrix:
         target: [x86_64, i686]
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-python@v4
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
       with:
         python-version: '3.12'
         architecture: x64
@@ -37,7 +37,7 @@ jobs:
         pip install punwrap --no-index --find-links dist --force-reinstall
         python -c 'import punwrap'
     - name: Upload wheels
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: wheels
         path: dist
@@ -50,8 +50,8 @@ jobs:
           - x86_64-unknown-linux-musl
           - i686-unknown-linux-musl
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-python@v4
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
       with:
         python-version: '3.12'
         architecture: x64
@@ -72,7 +72,7 @@ jobs:
           pip install punwrap --no-index --find-links /io/dist/ --force-reinstall
           python -c 'import punwrap'
     - name: Upload wheels
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: wheels
         path: dist
@@ -88,7 +88,7 @@ jobs:
     permissions:
       id-token: write
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: wheels
           path: dist
