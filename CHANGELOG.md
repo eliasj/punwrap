@@ -6,8 +6,11 @@ version 0.1.0.
 ## [Unreleased]
 
 ### Added
-- Server-side build for Python v3.13.
+- Local and server-side builds for Python v3.13.
 - Server-side build for Windows.
+
+### Removed
+- Builds for Python v3.8.
 
 ## [0.2.6] – 2024-08-01
 No efficacious changes to source code were made for this release.

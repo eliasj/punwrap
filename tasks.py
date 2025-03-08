@@ -11,7 +11,7 @@ from invoke import Collection, task
 
 # The following set of Python versions affects only local builds, not
 # server-side builds for deployment.
-PYTHON_INTERPRETER_VERSIONS = [[3, 9], [3, 10], [3, 11], [3, 12]]
+PYTHON_INTERPRETER_VERSIONS = [[3, 9], [3, 10], [3, 11], [3, 12], [3, 13]]
 
 INTERPRETER_STRING = ' '.join(
     f'--interpreter python{major}.{minor}'
