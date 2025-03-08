@@ -9,9 +9,14 @@ target/wheels even for sdist.
 
 from invoke import Collection, task
 
-PYTHON_INTERPRETER_VERSIONS = [[3, 8], [3, 9], [3, 10], [3, 11], [3, 12]]
-INTERPRETER_STRING = ' '.join(f'--interpreter python{major}.{minor}'
-                              for major, minor in PYTHON_INTERPRETER_VERSIONS)
+# The following set of Python versions affects only local builds, not
+# server-side builds for deployment.
+PYTHON_INTERPRETER_VERSIONS = [[3, 9], [3, 10], [3, 11], [3, 12]]
+
+INTERPRETER_STRING = ' '.join(
+    f'--interpreter python{major}.{minor}'
+    for major, minor in PYTHON_INTERPRETER_VERSIONS
+)
 
 
 @task()
@@ -40,8 +45,10 @@ def _build_in_docker(c, tail: str = ''):
     Artifacts should be compatible with glibc-based Linux distros like Debian.
 
     """
-    c.run('docker run --rm -v $(pwd):/io ghcr.io/pyo3/maturin build '
-          f'--release {INTERPRETER_STRING} {tail}')
+    c.run(
+        'docker run --rm -v $(pwd):/io ghcr.io/pyo3/maturin build '
+        f'--release {INTERPRETER_STRING} {tail}'
+    )
 
 
 @task()
