@@ -4,7 +4,10 @@ This log follows the conventions of
 version 0.1.0.
 
 ## [Unreleased]
-Nothing yet.
+
+### Added
+- Server-side build for Python v3.13.
+- Server-side build for Windows.
 
 ## [0.2.6] – 2024-08-01
 No efficacious changes to source code were made for this release.

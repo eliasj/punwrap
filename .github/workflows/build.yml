@@ -30,7 +30,7 @@ jobs:
         rust-toolchain: stable
         target: ${{ matrix.target }}
         manylinux: auto
-        args: --release --out dist -i 3.9 3.10 3.11 3.12
+        args: --release --out dist -i 3.9 3.10 3.11 3.12 3.13
     - name: Check wheel
       if: matrix.target == 'x86_64'
       run: |
@@ -61,7 +61,7 @@ jobs:
         rust-toolchain: stable
         target: ${{ matrix.target }}
         manylinux: musllinux_1_2
-        args: --release --out dist -i 3.9 3.10 3.11 3.12
+        args: --release --out dist -i 3.9 3.10 3.11 3.12 3.13
     - name: Check wheel
       if: matrix.target == 'x86_64-unknown-linux-musl'
       uses: addnab/docker-run-action@v3
@@ -77,11 +77,45 @@ jobs:
         name: wheels-${{ matrix.target }}
         path: dist
 
+  windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        platform:
+          - target: x86_64-pc-windows-msvc
+            arch: x64
+            interpreter: 3.8 3.9 3.10 3.11 3.12 3.13
+          - target: i686-pc-windows-msvc
+            arch: x86
+            interpreter: 3.8 3.9 3.10 3.11 3.12 3.13
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          architecture: ${{ matrix.platform.arch }}
+      - name: "Build wheels"
+        uses: PyO3/maturin-action@v1
+        with:
+          target: ${{ matrix.platform.target }}
+          args: --release --out dist -i ${{ matrix.platform.interpreter}}
+      - name: "Test wheel"
+        if: ${{ !startsWith(matrix.platform.target, 'aarch64') }}
+        shell: bash
+        run: |
+          python -m pip install punwrap --no-index --find-links dist --force-reinstall
+          python -c 'import punwrap'
+      - name: "Upload wheels"
+        uses: actions/upload-artifact@v4
+        with:
+          name: wheels-${{ matrix.platform.target }}
+          path: dist
+
   pypi-publish:
     name: Release
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
-    needs: [ manylinux, musllinux ]
+    needs: [ manylinux, musllinux, windows ]
     environment:
       name: pypi
       url: https://pypi.org/p/punwrap
