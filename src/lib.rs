@@ -18,7 +18,7 @@ fn unwrap(raw: &str) -> PyResult<String> {
 
 /// Expose a Python module implemented in Rust.
 #[pymodule]
-fn punwrap(_: Python, m: &PyModule) -> PyResult<()> {
+fn punwrap(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(wrap, m)?)?;
     m.add_function(wrap_pyfunction!(rewrap, m)?)?;
     m.add_function(wrap_pyfunction!(unwrap, m)?)?;
